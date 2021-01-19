@@ -36,6 +36,31 @@ void main() async {
 
   category.delete();*/
 
+  //Read
+  /*final response = await ParseObject('Category').getObject('GzPMMbAIWR');
+  if(response.success){
+    print(response.result);
+  }*/
+
+  //Read all
+  /*final response = await ParseObject('Category').getAll();
+  if(response.success) {
+    for(final object in response.result){
+      print(object);
+    }
+  }*/
+
+  //Filter
+  /*final query = QueryBuilder(ParseObject('Category'));
+
+  query.whereEqualTo('Position', 3);
+
+  final response = await query.query();
+
+  if(response.success) {
+    print(response.result);
+  }*/
+
 }
 
 class MyApp extends StatelessWidget {
