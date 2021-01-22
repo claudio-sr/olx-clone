@@ -17,7 +17,7 @@ void setupLocators() {
   GetIt.I.registerSingleton(PageStore());
 }
 
-Future<void> initializeParse() async {
+  Future<void> initializeParse() async {
   await Parse().initialize(
     '5NEtQl5p4vZHP448HVLOwKVKiqq96152E1yL2HwX',
     'https://parseapi.back4app.com/',
@@ -34,6 +34,12 @@ class MyApp extends StatelessWidget {
       title: 'xlo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primaryColor: Colors.purple,
+        scaffoldBackgroundColor: Colors.purple,
+        appBarTheme: AppBarTheme(
+          elevation: 0,
+        ),
+        cursorColor: Colors.orange,
       ),
       home: BaseScreen(),
     );
