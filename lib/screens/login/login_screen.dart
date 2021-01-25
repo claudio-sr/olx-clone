@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xlo_clone/screens/signup/signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -88,7 +89,7 @@ class LoginScreen extends StatelessWidget {
                     height: 40,
                     child: RaisedButton(
                       color: Colors.orange,
-                      child: Text('Entrar'),
+                      child: Text('ENTRAR'),
                       textColor: Colors.white,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
@@ -109,10 +110,10 @@ class LoginScreen extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            /*Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => SingUpScreen()
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => SignUpScreen()
                             )
-                            );*/
+                            );
                           },
                           child: Text(
                             'Cadastre-se',
