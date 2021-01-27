@@ -33,11 +33,11 @@ dependencies:
   flutter_mobx: ^1.1.0+2
   get_it: ^5.0.4
   brasil_fields: ^0.6.1
+  build_runner: ^1.10.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.10.13
   mobx_codegen: ^1.1.2
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

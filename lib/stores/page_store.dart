@@ -11,4 +11,5 @@ abstract class _PageStore with Store {
 
   @action
   void setPage(int value) => page = value;
+
 }
