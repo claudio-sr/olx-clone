@@ -4,7 +4,6 @@ import 'package:xlo_clone/screens/home/home_screen.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../stores/page_store.dart';
-import '../../stores/page_store.dart';
 
 class BaseScreen extends StatefulWidget {
   @override
@@ -20,10 +19,7 @@ class _BaseScreenState extends State<BaseScreen> {
   void initState() {
     super.initState();
 
-    reaction(
-        (_) => pageStore.page,
-        (page) => pageController.jumpToPage(page)
-    );
+    reaction((_) => pageStore.page, (page) => pageController.jumpToPage(page));
   }
 
   @override
@@ -34,10 +30,18 @@ class _BaseScreenState extends State<BaseScreen> {
         physics: NeverScrollableScrollPhysics(),
         children: [
           HomeScreen(),
-          Container(color: Colors.grey,),
-          Container(color: Colors.green,),
-          Container(color: Colors.amber,),
-          Container(color: Colors.pink,),
+          Container(
+            color: Colors.grey,
+          ),
+          Container(
+            color: Colors.green,
+          ),
+          Container(
+            color: Colors.amber,
+          ),
+          Container(
+            color: Colors.pink,
+          ),
         ],
       ),
     );

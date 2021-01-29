@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:parse_server_sdk_flutter/generated/i18n.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:get_it/get_it.dart';
 
@@ -17,7 +16,7 @@ void setupLocators() {
   GetIt.I.registerSingleton(PageStore());
 }
 
-  Future<void> initializeParse() async {
+Future<void> initializeParse() async {
   await Parse().initialize(
     '5NEtQl5p4vZHP448HVLOwKVKiqq96152E1yL2HwX',
     'https://parseapi.back4app.com/',

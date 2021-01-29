@@ -1,11 +1,12 @@
 import 'package:mobx/mobx.dart';
+import 'package:xlo_clone/models/user.dart';
+import 'package:xlo_clone/repositories/user_repository.dart';
 
 part 'signup_store.g.dart';
 
 class SignUpStore = _SignUpStore with _$SignUpStore;
 
 abstract class _SignUpStore with Store {
-
   @observable
   String name;
 
@@ -15,17 +16,15 @@ abstract class _SignUpStore with Store {
   @computed
   bool get nameValid => name != null && name.length > 6;
   String get nameError {
-    if(name == null || nameValid) {
+    if (name == null || nameValid) {
       return null;
-    }
-    else if(name.isEmpty) {
+    } else if (name.isEmpty) {
       return 'Campo obrigatório';
-    }
-    else {
+    } else {
       return 'Nome muito curto';
     }
   }
-  
+
   @observable
   String email;
 
@@ -36,9 +35,9 @@ abstract class _SignUpStore with Store {
   bool get emailValid => email != null && email.contains('@');
 
   String get emailError {
-    if(email == null || emailValid){
+    if (email == null || emailValid) {
       return null;
-    } else if(email.isEmpty) {
+    } else if (email.isEmpty) {
       return 'Campo obrigatório';
     } else {
       return 'E-mail inválido';
@@ -46,17 +45,17 @@ abstract class _SignUpStore with Store {
   }
 
   @observable
-  String  phone;
+  String phone;
 
   @action
   void setPhone(String value) => phone = value;
 
   @computed
-  bool get phoneValid => phone != null &&  phone.length >= 14;
+  bool get phoneValid => phone != null && phone.length >= 14;
   String get phoneError {
-    if(phone == null || phoneValid) {
+    if (phone == null || phoneValid) {
       return null;
-    }  else if(phone.isEmpty) {
+    } else if (phone.isEmpty) {
       return 'Campo obrigatório';
     } else {
       return 'Número inválido';
@@ -72,9 +71,9 @@ abstract class _SignUpStore with Store {
   @computed
   bool get passwordValid => password != null && password.length > 5;
   String get passwordError {
-    if(password == null || passwordValid){
+    if (password == null || passwordValid) {
       return null;
-    } else if(password.isEmpty){
+    } else if (password.isEmpty) {
       return 'Campo obrigatório';
     } else {
       return 'Senha muito curta';
@@ -88,10 +87,11 @@ abstract class _SignUpStore with Store {
   void setCheckPassword(String value) => checkPassword = value;
 
   @computed
-  bool get checkPasswordValid => checkPassword != null && checkPassword == password;
+  bool get checkPasswordValid =>
+      checkPassword != null && checkPassword == password;
 
   String get checkPasswordError {
-    if(checkPassword == null || checkPasswordValid) {
+    if (checkPassword == null || checkPasswordValid) {
       return null;
     } else {
       return 'Senhas não são iguais';
@@ -99,7 +99,12 @@ abstract class _SignUpStore with Store {
   }
 
   @computed
-  bool get isFormValid => nameValid && emailValid && phoneValid && passwordValid && checkPasswordValid;
+  bool get isFormValid =>
+      nameValid &&
+      emailValid &&
+      phoneValid &&
+      passwordValid &&
+      checkPasswordValid;
 
   @computed
   Function get signUpPressed => (isFormValid && !loading) ? _signUp : null;
@@ -110,7 +115,16 @@ abstract class _SignUpStore with Store {
   @action
   Future<void> _signUp() async {
     loading = true;
-    await Future.delayed(Duration(seconds: 3));
+
+    final user = User(
+      name: name,
+      email: email,
+      phone: phone,
+      password: password,
+    );
+
+    await UserRepository().signUp(user);
+
     loading = false;
   }
 }
