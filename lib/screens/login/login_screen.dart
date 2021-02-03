@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:xlo_clone/screens/signup/signup_screen.dart';
+import 'package:xlo_clone/stores/login_store.dart';
 
 class LoginScreen extends StatelessWidget {
+
+  final LoginStore loginStore = LoginStore();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,13 +48,17 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  TextField(
+                  Observer(builder: (_){
+                    return TextField(
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       isDense: true,
+                      errorText: loginStore.emailError,
                     ),
                     keyboardType: TextInputType.emailAddress,
-                  ),
+                    onChanged:loginStore.setEmail,
+                  );
+                  }),
                   const SizedBox(height: 10,),
                   Padding(
                       padding: const EdgeInsets.only(left: 3, bottom: 4, top: 8),
@@ -77,13 +86,17 @@ class LoginScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  TextField(
+                  Observer(builder: (_){
+                    return TextField(
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       isDense: true,
+                      errorText: loginStore.passwordError,
                     ),
                     obscureText: true,
-                  ),
+                    onChanged: loginStore.setPassword,
+                  );
+                  }),
                   const SizedBox(height: 10,),
                   Container(
                     height: 40,
