@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 
 import 'screens/base/base_screen.dart';
 import 'stores/page_store.dart';
+import 'stores/user_manager_store.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +15,7 @@ void main() async {
 
 void setupLocators() {
   GetIt.I.registerSingleton(PageStore());
+  GetIt.I.registerSingleton(UserManagerStore());
 }
 
 Future<void> initializeParse() async {

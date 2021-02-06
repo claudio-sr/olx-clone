@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:xlo_clone/componets/error_box.dart';
 import 'package:xlo_clone/screens/signup/signup_screen.dart';
+import 'package:xlo_clone/stores/login_store.dart';
 
 class LoginScreen extends StatelessWidget {
+
+  final LoginStore loginStore = LoginStore();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +38,11 @@ class LoginScreen extends StatelessWidget {
                       color: Colors.grey[900],
                     ),
                   ),
+                  Observer(builder: (_){
+                    return ErrorBox(
+                      message: loginStore.error,
+                    );
+                  },),
                   Padding(
                     padding: const EdgeInsets.only(left: 3, bottom: 4, top: 8),
                     child: Text(
@@ -43,12 +54,18 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  TextField(
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      isDense: true,
-                    ),
-                    keyboardType: TextInputType.emailAddress,
+                  Observer(builder: (_){
+                      return TextField(
+                        enabled: !loginStore.loading,
+                        decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          isDense: true,
+                          errorText: loginStore.emailError,
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                        onChanged: loginStore.setEmail,
+                      );
+                    },
                   ),
                   const SizedBox(height: 10,),
                   Padding(
@@ -77,26 +94,38 @@ class LoginScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  TextField(
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      isDense: true,
-                    ),
-                    obscureText: true,
+                  Observer(builder: (_){
+                      return TextField(
+                        enabled: !loginStore.loading,
+                        decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          isDense: true,
+                          errorText: loginStore.passwordError,
+                        ),
+                        obscureText: true,
+                        onChanged: loginStore.setPassword,
+                      );
+                    },
                   ),
                   const SizedBox(height: 10,),
-                  Container(
-                    height: 40,
-                    child: RaisedButton(
-                      color: Colors.orange,
-                      child: Text('ENTRAR'),
-                      textColor: Colors.white,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      onPressed: (){},
-                    ),
+                  Observer(builder: (_){
+                      return Container(
+                        height: 40,
+                        child: RaisedButton(
+                          color: Colors.orange,
+                          disabledColor: Colors.orange.withAlpha(120),
+                          child: loginStore.loading ? CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation(Colors.white),
+                          ) : Text('ENTRAR'),
+                          textColor: Colors.white,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          onPressed: loginStore.loginPressed,
+                        ),
+                      );
+                  },
                   ),
                   Divider(),
                   Padding(
