@@ -28,7 +28,6 @@ class CustomDrawerHeader extends StatelessWidget {
         child: Row(
           children: [
             Icon(Icons.person, color: Colors.white, size: 35),
-            SizedBox(width: 15,),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
