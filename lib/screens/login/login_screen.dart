@@ -5,7 +5,6 @@ import 'package:xlo_clone/screens/signup/signup_screen.dart';
 import 'package:xlo_clone/stores/login_store.dart';
 
 class LoginScreen extends StatelessWidget {
-
   final LoginStore loginStore = LoginStore();
 
   @override
@@ -38,11 +37,13 @@ class LoginScreen extends StatelessWidget {
                       color: Colors.grey[900],
                     ),
                   ),
-                  Observer(builder: (_){
-                    return ErrorBox(
-                      message: loginStore.error,
-                    );
-                  },),
+                  Observer(
+                    builder: (_) {
+                      return ErrorBox(
+                        message: loginStore.error,
+                      );
+                    },
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(left: 3, bottom: 4, top: 8),
                     child: Text(
@@ -54,7 +55,8 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Observer(builder: (_){
+                  Observer(
+                    builder: (_) {
                       return TextField(
                         enabled: !loginStore.loading,
                         decoration: InputDecoration(
@@ -67,14 +69,16 @@ class LoginScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  const SizedBox(height: 10,),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Padding(
-                      padding: const EdgeInsets.only(left: 3, bottom: 4, top: 8),
-                    child: Row (
+                    padding: const EdgeInsets.only(left: 3, bottom: 4, top: 8),
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                        'Senha',
+                          'Senha',
                           style: TextStyle(
                             color: Colors.grey[800],
                             fontSize: 16,
@@ -94,7 +98,8 @@ class LoginScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Observer(builder: (_){
+                  Observer(
+                    builder: (_) {
                       return TextField(
                         enabled: !loginStore.loading,
                         decoration: InputDecoration(
@@ -107,16 +112,22 @@ class LoginScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  const SizedBox(height: 10,),
-                  Observer(builder: (_){
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Observer(
+                    builder: (_) {
                       return Container(
                         height: 40,
                         child: RaisedButton(
                           color: Colors.orange,
                           disabledColor: Colors.orange.withAlpha(120),
-                          child: loginStore.loading ? CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation(Colors.white),
-                          ) : Text('ENTRAR'),
+                          child: loginStore.loading
+                              ? CircularProgressIndicator(
+                                  valueColor:
+                                      AlwaysStoppedAnimation(Colors.white),
+                                )
+                              : Text('ENTRAR'),
                           textColor: Colors.white,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
@@ -125,24 +136,22 @@ class LoginScreen extends StatelessWidget {
                           onPressed: loginStore.loginPressed,
                         ),
                       );
-                  },
+                    },
                   ),
                   Divider(),
                   Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 8),
                     child: Wrap(
                       alignment: WrapAlignment.center,
                       children: [
                         const Text(
-                            'Não tem conta? ',
+                          'Não tem conta? ',
                           style: TextStyle(fontSize: 16),
                         ),
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => SignUpScreen()
-                            )
-                            );
+                                builder: (_) => SignUpScreen()));
                           },
                           child: Text(
                             'Cadastre-se',
