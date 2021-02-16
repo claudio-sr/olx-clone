@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:xlo_clone/screens/create/components/image_modal.dart';
 
 class ImagesFields extends StatelessWidget {
   @override
@@ -13,7 +17,19 @@ class ImagesFields extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  if (Platform.isAndroid) {
+                    showBottomSheet(
+                      context: context,
+                      builder: (_) => ImageModal(),
+                    );
+                  } else {
+                    showCupertinoModalPopup(
+                      context: context,
+                      builder: (_) => ImageModal(),
+                    );
+                  }
+                },
                 child: CircleAvatar(
                   radius: 44,
                   backgroundColor: Colors.grey[300],
