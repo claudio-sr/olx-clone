@@ -5,8 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:xlo_clone/screens/create/components/image_modal.dart';
 
 class ImagesFields extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+    void onImageSelected(File image){
+      Navigator.of(context).pop();
+    }
+
     return Container(
       color: Colors.grey[200],
       height: 110,
@@ -21,12 +26,12 @@ class ImagesFields extends StatelessWidget {
                   if (Platform.isAndroid) {
                     showBottomSheet(
                       context: context,
-                      builder: (_) => ImageModal(),
+                      builder: (_) => ImageModal(onImageSelected),
                     );
                   } else {
                     showCupertinoModalPopup(
                       context: context,
-                      builder: (_) => ImageModal(),
+                      builder: (_) => ImageModal(onImageSelected),
                     );
                   }
                 },
