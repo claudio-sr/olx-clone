@@ -76,7 +76,7 @@ class ImageModal extends StatelessWidget {
         doneButtonTitle: 'Concluir',
       )
     );
-
-    onImageSelected(croppedFile);
+    if(croppedFile != null)
+      onImageSelected(croppedFile);
   }
 }
