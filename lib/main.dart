@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:get_it/get_it.dart';
+import 'package:xlo_clone/repositories/category_repository.dart';
 
 import 'screens/base/base_screen.dart';
 import 'stores/page_store.dart';
@@ -26,6 +27,10 @@ Future<void> initializeParse() async {
     autoSendSessionId: true,
     debug: true,
   );
+
+  final categories = await CategoryRepository().getList();
+
+  print(categories);
 }
 
 class MyApp extends StatelessWidget {
